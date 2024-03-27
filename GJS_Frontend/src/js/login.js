@@ -16,6 +16,7 @@ export default {
   methods: {
     async login() {
       this.loading = true
+      this.errors = {}
       await axios.get('http://localhost:8000/sanctum/csrf-cookie')
 
       await axios
@@ -34,6 +35,7 @@ export default {
         })
         .catch((error) => {
           this.errors = error.response.data.errors
+          this.loading = false;
         })
     }
   }

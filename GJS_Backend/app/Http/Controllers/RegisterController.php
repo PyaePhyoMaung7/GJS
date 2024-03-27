@@ -23,14 +23,15 @@ class RegisterController extends Controller
 
         //for special charcater (?=.[!$#%])
 
-        User::create([
+        $new_user = User::create([
             'name' => $request->user_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
+        $user = User::where('id',$new_user->id)->first();
         return response()->json([
-            'user' => Auth::user()
+            'user' => $user
         ]);
     }
 }

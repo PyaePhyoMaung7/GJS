@@ -9,6 +9,7 @@ class BrandController extends Controller
 {
     //return a list brands
     public function brandList(Request $request){
+        logger(request('key'));
         $brands = Brand::when(request('key'),function($query){
             $query->where('name','like','%'.request('key').'%');
         })->orderBy('id','desc')->paginate(9);

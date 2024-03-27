@@ -298,6 +298,9 @@
         </tbody>
       </table>
 
+      <div  v-if="reverseCategories.data.length == 0">
+          <div class="text-center py-5 h3 font-weight-bold ">There is no category with {{ searchKey }}</div>
+      </div>
       <!-- Category Edit Modal -->
 
       <div class="float-right">

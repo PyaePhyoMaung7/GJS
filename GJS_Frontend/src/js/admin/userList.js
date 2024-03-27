@@ -13,13 +13,15 @@ export default {
       currentUserId: this.$store.getters.getUserId,
       order: 'desc',
       loading: true,
+      searchKey: '',
     }
   },
 
   methods: {
     getUserData( page = 1){
       this.loading = true;
-      axios.get(`http://localhost:8000/api/user/list?page=${page}`).then((response) => {
+      // console.log(this.searchKey);
+      axios.post(`http://localhost:8000/api/user/list?page=${page}`, {'key' : this.searchKey}).then((response) => {
       this.reverseUsers = response.data.users;
       this.loading = false;
       this.users = this.reverseUsers.data.slice().reverse();

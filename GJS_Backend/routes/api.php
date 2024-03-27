@@ -7,6 +7,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\RegisterController;
@@ -34,14 +35,18 @@ Route::middleware([
     'auth:sanctum',
 ])->group(function () {
     //read data
-    Route::get('user/list', [UserController::class, 'userList']);
+    Route::post('user/list', [UserController::class, 'userList']);
     Route::get('sales/data', [OrderController::class, 'salesData']);
     Route::get('order/status', [OrderController::class, 'orderStatusData']);
     Route::get('order/list', [OrderController::class, 'orderList']);
 
+    //admin profile
+    Route::post('profile/update', [ProfileController::class, 'updateProfile']);
+    Route::post('password/update', [ProfileController::class, 'updatePassword']);
 
     //user
     Route::post('user/role/change', [UserController::class, 'changeRole']);
+
 
     //category
     Route::post('category/list', [CategoryController::class, 'categoryList']);

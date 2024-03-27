@@ -2,19 +2,21 @@
   <div class="container-fluid">
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <form
+      <form v-on:submit.prevent="onSubmit"
             class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search"
           >
             <div class="input-group">
               <input
                 type="text"
+                v-model="searchKey"
                 class="form-control bg-light border border-primary small"
                 placeholder="Search for..."
                 aria-label="Search"
                 aria-describedby="basic-addon2"
+                @keyup.enter="getUserData"
               />
               <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
+                <button @click="getUserData" class="btn btn-primary" type="button">
                   <i class="fas fa-search fa-sm"></i>
                 </button>
               </div>
@@ -97,6 +99,11 @@
           </tr>
         </tbody>
       </table>
+
+      <div  v-if="reverseUsers.data.length == 0">
+          <div class="text-center py-5 h3 font-weight-bold ">There is no user with {{ searchKey }}</div>
+      </div>
+
       <div class="float-right">
         <Bootstrap5Pagination
           :limit="2"
